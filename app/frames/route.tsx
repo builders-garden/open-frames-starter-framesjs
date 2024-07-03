@@ -10,7 +10,7 @@ const handleRequest = frames(async (ctx) => {
           flexDirection: "column",
         }}
       >
-        Open Frames - Frames.js starter
+        Open Frames - Frames.js Starter
       </div>
     ),
     textInput: "Type something here",
