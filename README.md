@@ -15,3 +15,5 @@ Following command will open frames debugger and also run the app in development 
 ```sh
 npm run dev
 ```
+
+# open-frames-starter-framesjs
