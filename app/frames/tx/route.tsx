@@ -1,24 +1,22 @@
-import {
-  Abi,
-  createPublicClient,
-  encodeFunctionData,
-  formatUnits,
-  getContract,
-  http,
-  parseUnits,
-} from "viem";
-import { optimism } from "viem/chains";
-import { frames } from "../index";
+import { Abi, encodeFunctionData, parseUnits } from "viem";
+import { frames } from "../frames";
 import { erc20Abi } from "./contracts/erc20-abi";
 import { transaction } from "frames.js/core";
+import { XmtpFrameMessageReturnType } from "frames.js/xmtp";
 
 export const POST = frames(async (ctx) => {
   if (!ctx?.message) {
     throw new Error("Invalid frame message");
   }
 
-  const address =
-    ctx.message.verifiedWalletAddress || ctx.message.connectedAddress;
+  let address: `0x${string}`;
+
+  if (ctx.clientProtocol?.id === "xmtp") {
+    address = (ctx.message as unknown as XmtpFrameMessageReturnType)
+      .verifiedWalletAddress as `0x${string}`;
+  } else {
+    address = ctx.message.connectedAddress as `0x${string}`;
+  }
 
   // Get current storage price
   const units = BigInt(parseUnits("1", 6));

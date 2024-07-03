@@ -20,6 +20,7 @@ export const frames = createFrames<State>({
             hubHttpUrl: "http://localhost:3010/hub",
           }),
     }),
+    // Learn more about openframes at https://framesjs.org/guides/open-frames
     openframes({
       clientProtocol: {
         id: "xmtp",
@@ -28,12 +29,14 @@ export const frames = createFrames<State>({
       handler: {
         isValidPayload: (body) => isXmtpFrameActionPayload(body),
         getFrameMessage: async (body) => {
+          // Check if the payload is a valid XMTP frame action payload
           if (!isXmtpFrameActionPayload(body)) {
+            // If it's not, return undefined
             console.error("Invalid XMTP payload");
             return undefined;
           }
+          // If it is, get the frame message
           const result = await getXmtpFrameMessage(body);
-
           return { ...result };
         },
       },

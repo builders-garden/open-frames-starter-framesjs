@@ -1,5 +1,5 @@
 import { Button } from "frames.js/next";
-import { frames } from "./../index";
+import { frames } from "../frames";
 
 const handleRequest = frames(async (ctx) => {
   const inputText = ctx.message?.inputText;
