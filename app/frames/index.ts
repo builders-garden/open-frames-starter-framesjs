@@ -2,7 +2,14 @@ import { farcasterHubContext, openframes } from "frames.js/middleware";
 import { createFrames } from "frames.js/next";
 import { isXmtpFrameActionPayload, getXmtpFrameMessage } from "frames.js/xmtp";
 
-export const frames = createFrames({
+export type State = {
+  count: number;
+};
+
+export const frames = createFrames<State>({
+  initialState: {
+    count: 0,
+  },
   basePath: "/frames",
   middleware: [
     farcasterHubContext({

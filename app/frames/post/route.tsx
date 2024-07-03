@@ -4,9 +4,17 @@ import { frames } from "./../index";
 const handleRequest = frames(async (ctx) => {
   const inputText = ctx.message?.inputText;
   const button = ctx.message?.buttonIndex;
+
+  const currentState = ctx.state;
+  // Update the state every time user clicks the button and visit this frame
+  const updatedState = {
+    ...currentState,
+    count: currentState.count + 1,
+  };
   return {
     image: (
       <div tw="flex flex-col">
+        <div tw="flex flex-col">Current State: {updatedState.count}</div>
         <div tw="flex flex-col">You typed: {inputText}</div>
         <div tw="flex flex-col">You clicked button: {button}</div>
       </div>
@@ -16,6 +24,7 @@ const handleRequest = frames(async (ctx) => {
         Back
       </Button>,
     ],
+    state: updatedState,
   };
 });
 

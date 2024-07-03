@@ -15,7 +15,12 @@ const handleRequest = frames(async (ctx) => {
     ),
     textInput: "Type something here",
     buttons: [
-      <Button action="link" target={"https://builders.garden"}>
+      <Button
+        action="link"
+        target={
+          "https://github.com/builders-garden/open-frames-starter-framesjs"
+        }
+      >
         Link
       </Button>,
       <Button action="post" target={"/post"}>
