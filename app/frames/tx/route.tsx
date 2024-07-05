@@ -18,14 +18,14 @@ export const POST = frames(async (ctx) => {
     address = ctx.message.connectedAddress as `0x${string}`;
   }
 
-  // Get current storage price
-  const units = BigInt(parseUnits("1", 6));
+  // Prepare amount to transfer
+  const amount = BigInt(parseUnits("1", 6));
 
   // Transfering 1 USDC to yourself
   const calldata = encodeFunctionData({
     abi: erc20Abi,
     functionName: "transfer",
-    args: [address as `0x${string}`, units] as const,
+    args: [address as `0x${string}`, amount] as const,
   });
 
   const BASE_USDC_ADDRESS = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
