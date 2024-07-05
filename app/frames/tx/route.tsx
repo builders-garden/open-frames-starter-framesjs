@@ -29,14 +29,14 @@ export const POST = frames(async (ctx) => {
     args: [address as `0x${string}`, amount] as const,
   });
 
-  const BASE_USDC_ADDRESS = "0x036CbD53842c5426634e7929541eC2318f3dCF7e";
+  const BASE_SEPOLIA_USDC_ADDRESS = "0x036CbD53842c5426634e7929541eC2318f3dCF7e";
 
   return transaction({
     chainId: `eip155:${baseSepolia.id}`, // Base Mainnet 8453
     method: "eth_sendTransaction",
     params: {
       abi: erc20Abi as Abi,
-      to: BASE_USDC_ADDRESS,
+      to: BASE_SEPOLIA_USDC_ADDRESS,
       data: calldata,
       value: "0",
     },
