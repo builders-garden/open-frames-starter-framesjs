@@ -3,6 +3,7 @@ import { frames } from "../frames";
 import { erc20Abi } from "./contracts/erc20-abi";
 import { transaction } from "frames.js/core";
 import { XmtpFrameMessageReturnType } from "frames.js/xmtp";
+import { baseSepolia } from "viem/chains";
 
 export const POST = frames(async (ctx) => {
   if (!ctx?.message) {
@@ -28,10 +29,10 @@ export const POST = frames(async (ctx) => {
     args: [address as `0x${string}`, amount] as const,
   });
 
-  const BASE_USDC_ADDRESS = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
+  const BASE_USDC_ADDRESS = "0x036CbD53842c5426634e7929541eC2318f3dCF7e";
 
   return transaction({
-    chainId: "eip155:8453", // Base Mainnet 8453
+    chainId: `eip155:${baseSepolia.id}`, // Base Mainnet 8453
     method: "eth_sendTransaction",
     params: {
       abi: erc20Abi as Abi,
