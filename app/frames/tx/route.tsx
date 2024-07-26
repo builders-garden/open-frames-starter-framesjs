@@ -10,14 +10,7 @@ export const POST = frames(async (ctx) => {
     throw new Error("Invalid frame message");
   }
 
-  let address: `0x${string}`;
-
-  if (ctx.clientProtocol?.id === "xmtp") {
-    address = (ctx.message as unknown as XmtpFrameMessageReturnType)
-      .verifiedWalletAddress as `0x${string}`;
-  } else {
-    address = ctx.message.connectedAddress as `0x${string}`;
-  }
+  const address = await ctx.walletAddress();
 
   // Prepare amount to transfer
   const amount = BigInt(parseUnits("1", 6));
@@ -29,7 +22,8 @@ export const POST = frames(async (ctx) => {
     args: [address as `0x${string}`, amount] as const,
   });
 
-  const BASE_SEPOLIA_USDC_ADDRESS = "0x036CbD53842c5426634e7929541eC2318f3dCF7e";
+  const BASE_SEPOLIA_USDC_ADDRESS =
+    "0x036CbD53842c5426634e7929541eC2318f3dCF7e";
 
   return transaction({
     chainId: `eip155:${baseSepolia.id}`, // Base Mainnet 8453

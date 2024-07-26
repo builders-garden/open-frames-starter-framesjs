@@ -11,12 +11,14 @@ const handleRequest = frames(async (ctx) => {
     ...currentState,
     count: currentState.count + 1,
   };
+  const address = (await ctx.walletAddress()) || "No address";
   return {
     image: (
       <div tw="flex flex-col">
-        <div tw="flex flex-col">Current State: {updatedState.count}</div>
-        <div tw="flex flex-col">You typed: {inputText}</div>
-        <div tw="flex flex-col">You clicked button: {button}</div>
+        <div tw="flex">Current State: {updatedState.count}</div>
+        <div tw="flex">You typed: {inputText}</div>
+        <div tw="flex">You clicked button: {button}</div>
+        <div tw="flex">Your address: {address}</div>
       </div>
     ),
     buttons: [
